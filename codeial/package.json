@@ -6,6 +6,7 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
     "index.js": "^0.0.3",
     "nodemon": "^2.0.12"
   },
