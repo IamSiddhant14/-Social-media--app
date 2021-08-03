@@ -1,7 +1,10 @@
-<h3>Please SIGN-UP</h3>
+<h3>Please SIGN-IN</h3>
+<form action="/users/create-session" method="POST" >
         <label for="email">Email</label><br>
-        <input type="text" id="email" placeholder="PLease Entre Your Email">
+        <input type="email" id="email" name="email" placeholder="PLease Entre Your Email" required>
         <hr>
         <label for="password">PassWord</label><br>
-        <input type="text" id="password" placeholder="PLease Entre Your PassWord">
+        <input type="password" name="password" id="password" placeholder=" PassWord" required>
         <hr>
+        <input type="submit" value="SIGNIN">
+</form>
