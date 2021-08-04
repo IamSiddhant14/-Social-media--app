@@ -10,7 +10,9 @@
     "express-ejs-layouts": "^2.5.1",
     "index.js": "^0.0.3",
     "mongoose": "^5.13.5",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
