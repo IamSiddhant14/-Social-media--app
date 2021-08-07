@@ -36,6 +36,7 @@ module.exports.create = function(req,res){
              })
          }else{
              return res.redirect('back')
+            // return res.redirect('/users/signin')
          } 
      })
 
@@ -45,6 +46,8 @@ module.exports.create = function(req,res){
 
 // Sign In AND CREATE A SESSION FOR THE USER 
 module.exports.createSession= function(req,res){
-
+    // return res.redirect('/users/profile');
+    console.log('inside createsession controller')
+    return res.redirect('/');
 }
 
