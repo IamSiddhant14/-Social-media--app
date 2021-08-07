@@ -12,8 +12,7 @@ const passportLocal = require('./config/passport-local-strategy');
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(expressLayouts);
-// use express router
-app.use('/',require('./routes'))  
+
 app.use(express.static('/assets'))
 // app.use(cookieParser());
 
@@ -23,6 +22,9 @@ app.set('layout extractScripts',true);
 //set up the view engine;
 app.set('view engine','ejs');
 app.set('views','./views')
+
+// use express router
+app.use('/',require('./routes'))  
 
 app.listen(port, function(err){
     if(err){

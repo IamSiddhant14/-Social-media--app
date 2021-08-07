@@ -39,7 +39,7 @@ passport.serializeUser(function(user, done){
     //injecting the userid in the cookie in the encripted formate
     done(null, user.id);
 })
- // desrialing the user from the key in the cookies
+ // desrialing the user from the key in the cookies 
 passport.deserializeUser(function(id, done){
     User.findById(id, function(err, user){
         if(err){
