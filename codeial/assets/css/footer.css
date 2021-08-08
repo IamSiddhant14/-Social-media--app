@@ -1,0 +1,15 @@
+#foot {
+  background-color: #666565; }
+  #foot #wrapperfoot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none; }
+    #foot #wrapperfoot p {
+      color: white; }
+    #foot #wrapperfoot #div {
+      margin-left: 100px; }
+      #foot #wrapperfoot #div #linkop {
+        color: white;
+        text-decoration: none;
+        margin-right: 10px; }

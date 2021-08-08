@@ -1,5 +1,7 @@
 body {
   margin: 0%;
-  background-color: grey; }
+  background-color: white; }
   body #layout-main {
-    height: 80%; }
+    height: 100%;
+    background-color: white;
+    margin: 0%; }
