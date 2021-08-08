@@ -1,5 +1,5 @@
  //The sign-in part/authentication is been handle in this part using the passport.js 
- //which help in setting up an sessin cookies
+ //which help in setting up an session cookies
  
  const passport = require('passport');
  const LocalStrategy = require('passport-local').Strategy;
@@ -16,7 +16,6 @@ const User = require('../models/user');
     //here this email and password are the users credentials
     //done is a call back function wich reports to passport.js where authentication was successfull or not
     function(email, password, done){
-        console.log('inside passport local strategy 1')
         //finding a user and establishing there identity
         User.findOne({email:email},function(err, user){
            if(err){
@@ -26,14 +25,21 @@ const User = require('../models/user');
            }
         // if user is not found or the password dont match the password entered
            console.log(`############## ${user}`);
-           if(!user || user.password != password){
+           if(!user){
                console.log('Invalid Username/Password');
+               //Here null means no error
+            //    window.alert("USER NOT FOUND PLEASE SIGNUP")
                return done(null, false);
                // here authentication is false means user is not found
            }
+           if(user.password != password){
+            console.log('Invalid Username/Password');
+            //Here null means no error
+            return done(null, false);
+            // here authentication is false means user is not found
+        }
         // if user is found return user
         //The frist argument in done is the error,which is null in this case
-           console.log('inside passport local strategy 2');
            return done(null,user);
         });
     }
@@ -76,7 +82,7 @@ passport.checkAuthentication = function(req,res,next){
 passport.setAuthenticatedUser = function(req, res, next){
     if(req.isAuthenticated()){
         //req.user contain the current signed in user from the session and we are just sending this to the local for the views
-        res.LocalStrategy.user = req.user;
+        res.locals.user = req.user;
     }
     next();
 }

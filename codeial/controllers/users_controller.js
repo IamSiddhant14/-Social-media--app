@@ -2,15 +2,24 @@ const User = require('../models/user');
 
 
 module.exports.profile=function(req,res){
-    res.send('<h1>Users Profile </h1>');
+    res.render('profile.ejs',{
+        title:'PROFILE OP'
+    })
 }
 
 module.exports.signup= function(req,res){
+    //This will prevent showing the signin/signup page when the user is been loggedin or signed in
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
     res.render('user_sign_up.ejs',{
         title:'Codeial! Sign Up'
     })
 }
 module.exports.signin= function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
     res.render('user_sign_in.ejs',{
         title:'Codeial! Sign In'
     })
@@ -35,8 +44,7 @@ module.exports.create = function(req,res){
                 return res.redirect('/users/signin')
              })
          }else{
-             return res.redirect('back')
-            // return res.redirect('/users/signin')
+             return res.redirect('/users/signup')
          } 
      })
 
@@ -46,8 +54,14 @@ module.exports.create = function(req,res){
 
 // Sign In AND CREATE A SESSION FOR THE USER 
 module.exports.createSession= function(req,res){
-    // return res.redirect('/users/profile');
     console.log('inside createsession controller')
-    return res.redirect('/');
+    return res.redirect('/users/profile');
+    // return res.redirect('/');
 }
 
+
+module.exports.destroySession = function(req,res){
+    req.logout()
+
+    return res.redirect('/')
+}

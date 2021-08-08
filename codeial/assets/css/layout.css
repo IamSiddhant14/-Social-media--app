@@ -1,5 +1,4 @@
 body{
     margin: 0%;
-    text-align: center;
-    background-color:aqua ;
+    background-image: linear-gradient(to right top, #848ec4, #7b88c3, #7183c2, #667dc1, #5a78c0, #4c71c5, #3b69c9, #2462cd, #0055d6, #0046de, #0032e2, #190ee4);
 }

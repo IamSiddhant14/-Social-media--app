@@ -8,13 +8,15 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-
+//This is used to store session cookies to prevent signing in again when server is been reloded
+const MongoStore = require('connect-mongo');
 
 app.use(express.urlencoded());
+//The cookie parser is used for reading and writting into cookies
 app.use(cookieParser());
 app.use(expressLayouts);
 
-app.use(express.static('/assets'))
+app.use(express.static('./assets'))
 // app.use(cookieParser());
 
 app.set('layout extractStyles',true);
@@ -25,6 +27,7 @@ app.set('view engine','ejs');
 app.set('views','./views')
 
 //middleware for encrption of the session cookies
+//mongostore is used to store session cookie in the DB
 app.use(session({
     name:'codeial',
     //this is key which is used while encrption
@@ -35,9 +38,17 @@ app.use(session({
     resave:false,
     cookie:{
         maxAge:(1000 *60 *100)
-    }
-    
+    },
+    store: MongoStore.create(
+        {
+            mongoUrl: 'mongodb://localhost/codeial_development',
+            autoRemove: 'disabled'
+        },
+        function(err){
+            console.log(err || 'connect-mongo setup ok');
+        })
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());

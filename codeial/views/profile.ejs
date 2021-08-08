@@ -7,13 +7,23 @@
     <title>profile</title>
 </head>
 <body> -->
-    <link rel="stylesheet" href="/codeial/assets/css/user_profile.css">
-    <!-- <%- include('_header'); %> -->
-     <p> FROM PROFILE </p>
-     
-     NAME:<%= User.name%><br>
-     
-     EMAIL:<%= User.email %>
-     <!-- <%- include('_footer'); %> -->
+
+<link rel="stylesheet" href="/css/user_profile.css" />
+<!-- <%- include('_header'); %> -->
+
+<hr>
+
+
+<p>FROM PROFILE</p>
+
+<P>THIS IS THE FEED</P>
+
+
+NAME:<%= locals.user.name%><br />
+
+EMAIL:<%= locals.user.email %>
+
+<hr>
+<!-- <%- include('_footer'); %> -->
 <!-- </body>
 </html> -->
