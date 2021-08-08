@@ -10,6 +10,23 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 //This is used to store session cookies to prevent signing in again when server is been reloded
 const MongoStore = require('connect-mongo');
+const sassMiddleware = require('node-sass-middleware');
+
+//This middleware converts the sass file into css before compilastion
+app.use(sassMiddleware({
+   //from where we will pick the scss file to convert into css
+    src:'/assets/scss',
+    //where we will put my converted scss files
+    dest:'/assests/css',
+    //To allow the visibily of the terminal (false in production)
+    debug:'true',
+    //every thing in single or multiple lines(minified or not)
+    outputStyle:'extended',
+    //Where to look the files 
+    prefix:'/css'
+
+
+}));
 
 app.use(express.urlencoded());
 //The cookie parser is used for reading and writting into cookies
