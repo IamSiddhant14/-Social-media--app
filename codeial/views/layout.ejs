@@ -5,13 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/header.css">
     <%- style %>
     <title><%= title %></title>
 </head>
 <body>
     <%- include('_header'); %>
+    <main id="layout-main">
+        <%- body %>
+    </main>
 
-    <%- body %>
 
      <%- include('_footer'); %>
 

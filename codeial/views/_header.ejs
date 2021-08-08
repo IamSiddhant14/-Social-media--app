@@ -1,26 +1,25 @@
-<header>
-     HEADER
-    
+<header class="head">
+    <p class="p">Codeial</p>
 
-    <ul>
+    <ul style="list-style-type: none" class="ul">
         <% if(locals.user){ %> 
           <li>
-              <a href="/users/profile"><%= user.name %></a>
+              <a href="/users/profile" class="li"><%= user.name %></a>
           </li>
           
           <li>
-              <a href="/users/signout">Sign-Out</a>
+              <a href="/users/signout" class="li">Sign Out</a>
           </li>
           
           
       <%}else {%> 
       
           <li>
-              <a href="/users/signup">Sign-up</a>
+              <a href="/users/signup" class="li">Sign-up</a>
           </li>
           
           <li>
-              <a href="/users/signin">Sign-in</a>
+              <a href="/users/signin" class="li">Sign in</a>
           </li>
           
           

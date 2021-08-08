@@ -12,19 +12,20 @@ const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
 
-//This middleware converts the sass file into css before compilastion
+//This middleware converts the sass file into css before putting it into the views file
 app.use(sassMiddleware({
-   //from where we will pick the scss file to convert into css
-    src:'/assets/scss',
-    //where we will put my converted scss files
-    dest:'/assests/css',
+    //from where we will pick the scss file to convert into css
+    src:'./assets/scss',
+    //The place where we will put the converted scss files
+    dest:'./assets/css',
     //To allow the visibily of the terminal (false in production)
     debug:'true',
     //every thing in single or multiple lines(minified or not)
     outputStyle:'extended',
-    //Where to look the files 
+    //Where to look the css files 
     prefix:'/css'
 
+    //This does not get compilned at the time of starting the server but at the time of reloading a page/rendering a page
 
 }));
 
