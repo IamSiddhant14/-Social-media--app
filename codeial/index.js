@@ -1,7 +1,8 @@
 const express = require('express');
 const app=express();
+//used to read and write cookies
 const cookieParser= require('cookie-parser');
-const port = 8000;
+const port = 8004;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 //require to encrpt the user cookies
@@ -28,20 +29,21 @@ app.use(sassMiddleware({
     //This does not get compilned at the time of starting the server but at the time of reloading a page/rendering a page
 
 }));
-
+//convert the form data field by the user into the form of req.body
 app.use(express.urlencoded());
 //The cookie parser is used for reading and writting into cookies
 app.use(cookieParser());
+//this is used so as to load the layouts along with the ejs files
 app.use(expressLayouts);
 
 app.use(express.static('./assets'))
-// app.use(cookieParser());
 
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 //set up the view engine;
 app.set('view engine','ejs');
+
 app.set('views','./views')
 
 //middleware for encrption of the session cookies
