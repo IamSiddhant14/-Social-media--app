@@ -7,14 +7,7 @@ console.log('ROUTER LOADED');
 
 router.get('/',homeController.home);
 router.use('/users',require('./users'));
-router.use('/feed',require('./post'));
-router.use('/pro',require('./pro'));
-// router.use('/signup',require('./signup'))
-// router.use('/signin',require('./signin'))
-
-
-
-
+router.use('/posts',require('./posts'));
 
 module.exports = router;
  

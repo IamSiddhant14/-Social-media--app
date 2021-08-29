@@ -1,5 +1,38 @@
-    <title><%= title %></title>
+<title><%= title %></title>
 
-    <h1>
-        This Is Codeial<%= title %> 
-    </h1>
+<h1 style="text-align: center">This Is Codeial <%= title %></h1>
+<section id="feed-posts">
+  <h4>POSTS</h4>
+  <form action="/posts/create" id="new-post-form" method="POST">
+    <textarea
+      name="content"
+      cols="30"
+      rows="3"
+      placholder="Type here.."
+    ></textarea>
+    <input type="submit" value="post" />
+  </form>
+</section>
+
+<div id="posts-list-container">
+    <ul>
+        <% for(post of posts){ %>
+            
+        <li>
+            <p>
+                <%= post.content %>
+            </p>
+            
+        </li>
+            
+        <%} %>
+    </ul>
+</div>
+
+
+
+  </ul>
+</div>
+
+
+
