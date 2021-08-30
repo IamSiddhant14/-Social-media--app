@@ -1,6 +1,5 @@
-<title><%= title %></title>
 
-<h1 style="text-align: center">This Is Codeial <%= title %></h1>
+<h1 style="text-align: center">This Is <%= title %></h1>
 <section id="feed-posts">
   <h4>POSTS</h4>
   <form action="/posts/create" id="new-post-form" method="POST">
@@ -15,18 +14,29 @@
 </section>
 
 <div id="posts-list-container">
+  <% if(locals.user){%>
+
     <ul>
-        <% for(post of posts){ %>
-            
-        <li>
-            <p>
-                <%= post.content %>
-            </p>
-            
-        </li>
-            
-        <%} %>
-    </ul>
+      <% for(post of posts){ %>
+          
+      <li>
+          <h1>
+              <%= post.content %>
+              <br>
+              <small>
+                <%= post.user.name%>
+              </small>
+              <!--insted of fetch just the id of the user what if we fetch the entire user along with all of its feilds -->
+              <!-- we willl take the help of mongoose populate for this -->
+          </h1>
+          
+      </li>
+          
+      <%} %>
+  </ul>
+  
+  <%}%>
+
 </div>
 
 
@@ -34,5 +44,7 @@
   </ul>
 </div>
 
+
+<!-- There are two objectid is is of the document and the another is the objectif od the user who has created this object -->
 
 

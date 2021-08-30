@@ -2,14 +2,15 @@ const express = require('express');
 const app=express();
 //used to read and write cookies
 const cookieParser= require('cookie-parser');
-const port = 8004;
+const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
+//connecting the odm with the database
 const db = require('./config/mongoose');
 //require to encrpt the user cookies
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-//This is used to store session cookies to prevent signing in again when server is been reloded
+//This is used to store session cookiesinto the database so as to prevent signing in again when server is been reloded
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
 
