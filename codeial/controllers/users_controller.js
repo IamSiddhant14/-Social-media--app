@@ -2,8 +2,9 @@ const User = require('../models/user');
 
 
 module.exports.profile=function(req,res){
+    console.log('inside profile ,usercontroller')
     res.render('profile.ejs',{
-        title:'PROFILE OP'
+        title:'PROFILE'
     })
 }
 
@@ -46,7 +47,7 @@ module.exports.create = function(req,res){
                 return res.redirect('/users/signin')
              })
          }else{
-             return res.redirect('/users/signup')
+             return res.redirect('/users/signin')
          } 
      })
 
