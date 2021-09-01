@@ -16,6 +16,14 @@
                 
             <li>
                 <p>
+                    <% if (locals.user && locals.user.id == post.user.id){%>
+
+                        <small>
+                            <a href="/posts/destroy/<%= post.id %>">X</a>
+                        </small>
+
+                    <%}%>
+
                     <%= post.content %>
                     <br>
                     <!--insted of fetch just the id of the user what if we fetch the entire user along with all of its feilds -->
