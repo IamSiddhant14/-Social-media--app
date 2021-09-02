@@ -3,10 +3,31 @@ const User = require('../models/user');
 
 module.exports.profile=function(req,res){
     console.log('inside profile ,usercontroller')
-    res.render('profile.ejs',{
-        title:'PROFILE'
-    })
-}
+
+        User.findById(req.params.id,function(err, user){
+
+            res.render('profile.ejs',{
+                title:'PROFILE',
+                profile_user: user
+            });
+    
+        })
+
+    }
+
+    module.exports.update = function(req,res){
+        if(req.user.id == req.params.id){
+
+            User.findByIdAndUpdate(req.params.id, req.body ,function(req,user){
+                return res.redirect('back');
+            });
+
+        }else{
+            return res.status(401).send('unauthorized');
+        }
+    }
+
+
 
 module.exports.signup= function(req,res){
     //This will prevent showing the signin/signup page when the user is been loggedin or signed in
@@ -17,6 +38,8 @@ module.exports.signup= function(req,res){
         title:'Codeial! Sign Up'
     })
 }
+
+
 module.exports.signin= function(req,res){
     if(req.isAuthenticated()){
         return res.redirect('/users/profile')
