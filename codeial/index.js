@@ -13,15 +13,16 @@ const passportLocal = require('./config/passport-local-strategy');
 //This is used to store session cookiesinto the database so as to prevent signing in again when server is been reloded
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
+const path = require('path');
 
-//This middleware converts the sass file into css before putting it into the views file
+// This middleware converts the sass file into css before putting it into the views file
 app.use(sassMiddleware({
     //from where we will pick the scss file to convert into css
-    src:'./assets/scss',
+    src: path.join('assets/scss'),
     //The place where we will put the converted scss files
-    dest:'./assets/css',
+    dest: path.join('assets/css'),
     //To allow the visibily of the terminal (false in production)
-    debug:'true',
+    debug:true,
     //every thing in single or multiple lines(minified or not)
     outputStyle:'extended',
     //Where to look the css files 
@@ -30,6 +31,14 @@ app.use(sassMiddleware({
     //This does not get compilned at the time of starting the server but at the time of reloading a page/rendering a page
 
 }));
+
+// app.use(sassMiddleware({
+//     src: './assets/scss',
+//     dest: './assets/css',
+//     debug: true,  //  Put false in production mode
+//     outputStyle: 'extended',  // To not show in one line
+//     prefix: '/css'   // Important --- Where prefix is at <link rel="stylesheets" href="/css/style.css"/>
+// }));
 //convert the form data field by the user into the form of req.body
 app.use(express.urlencoded());
 //The cookie parser is used for reading and writting into cookies
@@ -37,7 +46,7 @@ app.use(cookieParser());
 //this is used so as to load the layouts along with the ejs files
 app.use(expressLayouts);
 
-app.use(express.static('./assets'))
+app.use(express.static('./assets'));
 
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);

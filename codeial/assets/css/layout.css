@@ -1,7 +1,7 @@
-body {
+#bodyop {
   margin: 0%;
   background-color: white; }
-  body #layout-main {
-    height: 100%;
+  #bodyop #layout-main {
+    display: block;
     background-color: white;
     margin: 0%; }
