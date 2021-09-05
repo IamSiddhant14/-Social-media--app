@@ -81,7 +81,10 @@ module.exports.create = function(req,res){
 
 // Sign In AND CREATE A SESSION FOR THE USER 
 module.exports.createSession= function(req,res){
-    console.log('inside createsession controller')
+    //This messsage need to transfered to the responce,we will use an coustum middelware for the same
+    console.log('inside createsession controller');
+              //  TYPE           MESSAGE
+    req.flash('success','Logged in Successfully');
     // return res.redirect('/users/profile');
     return res.redirect('/');
 }
@@ -89,6 +92,7 @@ module.exports.createSession= function(req,res){
 
 module.exports.destroySession = function(req,res){
     req.logout()
-
+    req.flash('success','Logged out Successfully!!!');
+    //This messsage need to transfered to the responce,we will use an coustum middelware for the same
     return res.redirect('/')
 }

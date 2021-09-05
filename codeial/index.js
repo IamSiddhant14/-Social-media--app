@@ -14,6 +14,8 @@ const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
 const path = require('path');
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
 
 // This middleware converts the sass file into css before putting it into the views file
 app.use(sassMiddleware({
@@ -84,7 +86,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 //This is described in the passport.js
 app.use(passport.setAuthenticatedUser);
-  
+
+//Flash messages are stored in the session cookie and are been cleared in the very next rquest
+//Flash message will be stored in the cookie which stores session info
+//Before the redirecting to the page the flash message need to be setted up in the locals
+
+app.use(flash());
+//This middleware fetchs everything from the req.flash in the controllers and sets it into the res.locals.flash
+app.use(customMware.setFlash);
 
 // use express router
 app.use('/',require('./routes'))  

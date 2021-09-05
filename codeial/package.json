@@ -4,6 +4,7 @@
   "description": "codeial website",
   "main": "index.js",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^4.4.1",
     "cookie-parser": "^1.4.5",
     "ejs": "^3.1.6",

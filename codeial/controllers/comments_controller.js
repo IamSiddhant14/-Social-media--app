@@ -29,10 +29,42 @@ module.exports.create = function(req,res){
     })
 }
 
+module.exports.create = async function(req,res){
+    //Here req.body.post refer to the input type post which is post.id
+
+    try{
+
+        let post = await Post.findById(req.body.post)
+
+        if(post){
+            let comment = await Comment.create({
+                content: req.body.content,
+                post: req.body.post,
+                user: req.user._id
+            })
 
 
-module.exports.destroy = function(req, res){
-    Comment.findById(req.params.id, function(err, comment){
+                //adding comment to the comments array
+                post.comments.push(comment);
+
+                //updating changes and saving it
+                post.save();
+
+                res.redirect('/');
+            };
+        }catch(err){
+
+            console.log("Error",err)
+
+        }
+    }
+
+
+
+
+module.exports.destroy = async function(req, res){
+
+    let comment = await Comment.findById(req.params.id)
         if (comment.user == req.user.id){
             
             // Since we need to delte the comment id from the post comments array also therefore we frist require to 
@@ -43,15 +75,14 @@ module.exports.destroy = function(req, res){
 
             comment.remove();
 
-            Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}}, function(err, post){
-                return res.redirect('back');
-            })
+            await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}})
+            
+            return res.redirect('back');
+            
         }else{
             return res.redirect('back');
         }
-    });
 }
-
 
 // const Comment = require('../models/comment');
 // const Post = require('../models/post');
