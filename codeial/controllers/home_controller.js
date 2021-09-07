@@ -26,10 +26,12 @@ module.exports.home = async function (req, res) {
 
 // #3(below)
 
-
+ 
 try{
     //await stopsit from being an async statement
     let posts = await Post.find({})
+    //help us in sorting in the newest frist manner
+    .sort('-createdAt')
     .populate('user')
     .populate({
         path: 'comments',

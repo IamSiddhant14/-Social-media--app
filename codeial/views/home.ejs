@@ -15,8 +15,7 @@
         <div id="posts-list-container">
             <ul>
                 <% for(post of posts){ %>
-    
-    <!-- For posts, partialls been put into the _post.ejs -->
+                    <!-- For posts, partialls been put into the _post.ejs -->
                     <%- include('_post'); %>
                 <%} %>
             </ul>
@@ -37,7 +36,8 @@
 
 
 </div>
-
-<script src="../assets/js/home_post.js"></script>
+<!-- Since we have already defined that all the static files is been present in the assests folder therefore here we 
+will not use ../Assests and just /js/home_post.js -->
+<script src="/js/home_post.js"></script>
 
 

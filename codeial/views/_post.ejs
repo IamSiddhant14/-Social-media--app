@@ -1,9 +1,10 @@
-<li>
+<!-- _.id or.id does not matter as here we are not comparing -->
+<li id="post-<%= post._id %>">
     <p>
         <% if (locals.user && locals.user.id == post.user.id){%>
 
             <small>
-                <a href="/posts/destroy/<%= post.id %>">X</a>
+                <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
             </small>
 
         <%}%>
@@ -11,11 +12,12 @@
         <%= post.content %>
         <br>
         <!--insted of fetch just the id of the user what if we fetch the entire user along with all of its feilds -->
-        <!-- we willl take the help of mongoose populate for this -->
+        <!-- we will take the help of mongoose populate for this -->
         <small>
             <%= post.user.name %>
         </small>
     </p>
+    
     <div class="post-comments">
         <% if (locals.user){ %>
             <form action="/comments/create" method="POST">
