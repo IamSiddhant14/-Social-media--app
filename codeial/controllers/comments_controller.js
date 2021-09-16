@@ -43,7 +43,7 @@ module.exports.create = async function(req,res){
                 user: req.user._id
             })
 
-
+                req.flash('success','comment added')
                 //adding comment to the comments array
                 post.comments.push(comment);
 
@@ -53,7 +53,7 @@ module.exports.create = async function(req,res){
                 res.redirect('/');
             };
         }catch(err){
-
+            req.flash('error','we run into an error')
             console.log("Error",err)
 
         }
@@ -76,10 +76,11 @@ module.exports.destroy = async function(req, res){
             comment.remove();
 
             await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}})
-            
+            req.flash('success','comment deleted')
             return res.redirect('back');
             
         }else{
+            req.flash('error','you run into an error')
             return res.redirect('back');
         }
 }

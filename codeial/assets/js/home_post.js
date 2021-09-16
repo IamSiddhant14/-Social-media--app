@@ -9,7 +9,7 @@
      
         newPostForm.submit(function(e) {//here e is the event
             e.preventDefault();
-            console.log('Inside home_post.js ####################################')
+            console.log('Inside home_post.js ####################')
 
             $.ajax({
                 type: 'post',
@@ -19,6 +19,7 @@
                     console.log('here2')
                     let newPost = newPostDom(data.data.post);
                     $("#posts-list-container>ul").prepend(newPost);
+                    //Here the newPost has an class inside of it called .delete-post-button
                     deletePost($(' .delete-post-button', newPost))
 
 
@@ -45,8 +46,10 @@
                 //This will get use the href part of the anchor tag
                 url: $(deleteLink).prop('href'),
                 success: function(data){
+                    //To use ${} we require the uae of `` and for selecting it e are putting it into the form $(`x${ }`)
                     $(`#post-${data.data.post_id}`).remove();    
-                },error: function(error){
+                },
+                error: function(error){
                     console.log(error.responceText);
                 }
             });
@@ -54,8 +57,8 @@
         })
     }
 
-    createPost();
-}
+    
+
 
 //method to create a post in Dom
 let newPostDom = function (post) {
@@ -88,7 +91,7 @@ let newPostDom = function (post) {
           
                 <form action="/comments/create" method="POST">
                     <input type="text" name="content" placeholder="Type Here to add comment..." required>
-                    <input type="hidden" name="post" value="${`post._id`}" >
+                    <input type="hidden" name="post" value="${post._id}" >
                     <input type="submit" value="Add Comment">
                 </form>
     
@@ -105,3 +108,24 @@ let newPostDom = function (post) {
     
     `)
 }
+
+let convertPostsToAjax = function(){
+
+     $("#posts-list-container").each(function(){
+
+        let self = $(this);
+        let deleteButton = $(".delete-post-button", self);
+        deletePost(deleteButton);
+
+        let postId = self.prop("id").split("-")[1]
+        
+
+     })
+
+}
+
+createPost();
+convertPostsToAjax();
+
+}
+

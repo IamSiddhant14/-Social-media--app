@@ -6,11 +6,11 @@ const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 //connecting the odm with the database
 const db = require('./config/mongoose');
-//require to encrpt the user cookies
+//require to encrpt the userid (in this case)into the session cookie which is then send back to the browser
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
-//This is used to store session cookiesinto the database so as to prevent signing in again when server is been reloded
+//This is used to store session cookies into the database so as to prevent signing in again when server is been reloded
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');
 const path = require('path');
@@ -49,26 +49,29 @@ app.use(cookieParser());
 app.use(expressLayouts);
 
 app.use(express.static('./assets'));
-
+//This will extract the various Style adscript tags from the ejs file and to it into the defined 
+//location in the layout file while combining the ejs and the layout file
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 //set up the view engine;
 app.set('view engine','ejs');
-
+//./views means it is gone search in the neigbouring folders
 app.set('views','./views')
 
 //middleware for encrption of the session cookies
 //mongostore is used to store session cookie in the DB
 app.use(session({
+    //Here codeial is the name of the cookie
     name:'codeial',
-    //this is key which is used while encrption
+    //this is key which is used while encrption and decrption
     secret:'blahsomething',
     //prevent setting up extra data in the session cookie
     saveUninitialized:false,
-    //prevent the rewrittin of the data even when it is not been chsngrd
+    //prevent the rewrittin of the data even when it is not been changed
     resave:false,
     cookie:{
+        //Age of the session cookie
         maxAge:(1000 *60 *100)
     },
     store: MongoStore.create(

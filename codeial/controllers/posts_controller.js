@@ -23,6 +23,7 @@ module.exports.create = async function(req,res){
             user:req.user._id
         });
         post = await post.populate('user', 'name').execPopulate();
+        req.flash('success','Post created')
 
         // Checking it whether its an xml http request or not
         if( req.xhr){
@@ -83,7 +84,7 @@ module.exports.destroy= async function(req,res){
                         data: {
                             post_id: req.params.id
                         },
-                        message:"Post deleted successfully"
+                        message:"Post deleted"
                     })
                 }
 

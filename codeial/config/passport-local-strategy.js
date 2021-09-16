@@ -49,13 +49,13 @@ passport.use(new LocalStrategy({
 
 ));
 
-//serializing the user to decide which key is to be kept in the cookies
+//serializing the user to decide which key is to be kept in the cookies when sending the cookie to the browser where our key is been encryypted in the cookie
 passport.serializeUser(function (user, done) {
     //injecting the userid in the cookie in the encripted formate
     console.log(`*******serializeUser******* ${user}`);
     done(null, user.id);
 });
-// desrialing the user from the key in the cookies 
+// desrialing the user.id from the key which is been send via a cookies when the request is been send to the server,here we frist find the user from the encrpted key and then verify it with the DB
 passport.deserializeUser(function (id, done) {
     User.findById(id, function (err, user) {
         if (err) {
