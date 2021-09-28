@@ -11,8 +11,10 @@ router.get('/signin', usersController.signin)
 router.post('/create', usersController.create)
 // used passport as a middleware to authenticate
 router.post('/create-session', passport.authenticate(
+    //STRATEGY USED
     'local',
-    { failureRedirect: '/users/signup' }
+    //WHAT TO DO ON FALIURE
+    { failureRedirect: '/users/signin' }
 ), usersController.createSession)
 router.get('/signout', usersController.destroySession)
 

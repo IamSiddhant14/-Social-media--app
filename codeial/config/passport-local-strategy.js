@@ -13,10 +13,11 @@ passport.use(new LocalStrategy({
     //unique field through which we will find the user(here email from schema)
     usernameField: 'email',
     passReqToCallback: true
+    //provide use the ability to pass req as a frist argument to the call back function
 },
     //here this email and password are the users credentials
     //done is a call back function wich reports to passport.js where authentication was successfull or not
-    function (req,email, password, done) {
+    function (req, email, password, done) {
         //finding a user and establishing there identity
         User.findOne({ email: email }, function (err, user) {
             if (err) {
@@ -88,6 +89,7 @@ passport.setAuthenticatedUser = function (req, res, next) {
         //req.user contain the current signed in user from the session and we are just sending this to the local for the views
         console.log("from passport.setAuthenticatedUser")
         console.log(req.user)
+        // console.log(req)
         //If authentication is succeeds,the req.user property will be set to the authenticated user.(This all action is been performed by passport.js)
         res.locals.user = req.user;
     }

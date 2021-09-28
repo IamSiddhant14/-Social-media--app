@@ -67,7 +67,7 @@ module.exports.destroy = async function(req, res){
     let comment = await Comment.findById(req.params.id)
         if (comment.user == req.user.id){
             
-            // Since we need to delte the comment id from the post comments array also therefore we frist require to 
+            // Since we need to delete the comment id from the post comments array also therefore we frist require to 
             //save the postid of the to which our comment belong to and then later 
             //delete that comment from the array
 

@@ -1,5 +1,6 @@
 const User = require('../models/user');
-
+const fs = require('fs');
+const path = require('path');
 
 module.exports.profile=function(req,res){
     console.log('inside profile ,usercontroller')
@@ -15,14 +16,52 @@ module.exports.profile=function(req,res){
 
     }
 
-    module.exports.update = function(req,res){
-        if(req.user.id == req.params.id){
+    module.exports.update = async function(req,res){
+    //     if(req.user.id == req.params.id){
 
-            User.findByIdAndUpdate(req.params.id, req.body ,function(req,user){
-                return res.redirect('back');
-            });
+    //         User.findByIdAndUpdate(req.params.id, req.body ,function(err,user){
+    //             return res.redirect('back');
+    //         });
+
+    //     }else{
+    //         return res.status(401).send('unauthorized');
+    //     }
+    // }
+    
+        if(req.user.id == req.params.id){
+            try{
+                let user = await User.findById(req.params.id); 
+                //To access the body params we couldnt access it directly as the form is an multipart form so thats why therefore our body parser fails in this case 
+                User.uploadedAvatar(req,res,function(err){
+                    if(err){
+                        console.log('********** multer Error :',err)
+                    }
+                    //This multer is helping us read the the req.body which wasnt possible without it
+                    console.log(req.file)
+                    user.name = req.body.name;
+                    user.email = req.body.email;
+
+                    if(req.file){
+       
+                        if(user.avatar){
+                                         // Vailidating a string as a path
+                            fs.unlinkSync(path.join(__dirname,'..',user.avatar))
+                        }
+                        //This is saving the path of the file into the avatar feild in the user
+                        user.avatar = User.avatarPath +'/'+ req.file.filename
+                    }
+                    user.save();
+                    return res.redirect('back')
+                })
+
+            }catch(err){
+                req.flash('error',err)
+                console.log('Error',err)
+            }
+
 
         }else{
+            res.flash('error','unauthorized');
             return res.status(401).send('unauthorized');
         }
     }

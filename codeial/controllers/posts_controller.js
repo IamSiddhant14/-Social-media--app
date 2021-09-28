@@ -1,4 +1,4 @@
-const Post = require ('../models/post');
+    const Post = require ('../models/post');
 const Comment = require('../models/comment')
 
 // module.exports.create = function(req,res){
@@ -18,20 +18,23 @@ module.exports.create = async function(req,res){
 
     try{
         // asigning it to an variable
+        console.log("For clarification",req.body,req.user)
         let post = await Post.create({
-            content:req.body.content,
+            content:req.body.content, 
             user:req.user._id
         });
-        post = await post.populate('user', 'name').execPopulate();
+        post = await post.populate('user').execPopulate();
         req.flash('success','Post created')
 
         // Checking it whether its an xml http request or not
-        if( req.xhr){
-           console.log('here')
+        if(req.xhr){
+           console.log('printing from ajax of post controller')
+           //We always return json with a status
             return res.status(200).json({
                 data: {
                     post : post,
                 },
+                //We always return json with a message
                 message : "Post created "
             });
         };
@@ -47,8 +50,6 @@ module.exports.create = async function(req,res){
         return;
 
     }
-
-   
 }
 
 // module.exports.destroy=function(req,res){
@@ -76,7 +77,7 @@ module.exports.destroy= async function(req,res){
 
         if(post.user == req.user.id){
                 post.remove();
-    
+                console.log("opp")
                 await Comment.deleteMany({post: req.params.id})
                 
                 if (req.xhr){

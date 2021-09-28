@@ -49,6 +49,10 @@ app.use(cookieParser());
 app.use(expressLayouts);
 
 app.use(express.static('./assets'));
+
+//Made the upload part availblle to the browser
+app.use('/uploads',express.static(__dirname+ '/uploads'));
+console.log("######################################################",__dirname)
 //This will extract the various Style adscript tags from the ejs file and to it into the defined 
 //location in the layout file while combining the ejs and the layout file
 app.set('layout extractStyles',true);

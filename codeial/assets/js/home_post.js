@@ -3,24 +3,28 @@
 //function which sends the data to the controller action via ajax
 //curly brases for block scope
 {
+    //This function is taking the data to submitted by the client and sending it to action in jason formate with the help of ajax
     let createPost = function () {
         //#new-post-form is the id of the form from home conrtoller
         let newPostForm = $('#new-post-form');
      
         newPostForm.submit(function(e) {//here e is the event
+            //Prevetn the default behaviour
             e.preventDefault();
             console.log('Inside home_post.js ####################')
 
             $.ajax({
+
                 type: 'post',
                 url: '/posts/create',
+                //serializer converts the post form data in json
                 data: newPostForm.serialize(),
                 success: function (data) {
-                    console.log('here2')
+                    console.log(data)
                     let newPost = newPostDom(data.data.post);
                     $("#posts-list-container>ul").prepend(newPost);
                     //Here the newPost has an class inside of it called .delete-post-button
-                    deletePost($(' .delete-post-button', newPost))
+                    deletePost($('.delete-post-button', newPost))
 
 
 
@@ -47,6 +51,7 @@
                 url: $(deleteLink).prop('href'),
                 success: function(data){
                     //To use ${} we require the uae of `` and for selecting it e are putting it into the form $(`x${ }`)
+                    //We will be getting the id of the post which is been deleted
                     $(`#post-${data.data.post_id}`).remove();    
                 },
                 error: function(error){
@@ -71,10 +76,10 @@ let newPostDom = function (post) {
     //$("")
     // 
     return $(`<!-- _.id or.id does not matter as here we are not comparing -->
-    <li id="post-${ post._id}">
+    <li id="post-${post._id}">
         <p>
                 <small>
-                    <a class="delete-post-button" href="/posts/destroy/${ post._id}">X</a>
+                    <a class="delete-post-button" href="/posts/destroy/${post._id}">X</a>
                 </small>
     
   
