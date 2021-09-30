@@ -10,6 +10,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
 //This is used to store session cookies into the database so as to prevent signing in again when server is been reloded
 const MongoStore = require('connect-mongo');
 const sassMiddleware = require('node-sass-middleware');

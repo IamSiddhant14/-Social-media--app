@@ -37,6 +37,7 @@ module.exports.profile=function(req,res){
                         console.log('********** multer Error :',err)
                     }
                     //This multer is helping us read the the req.body which wasnt possible without it
+                    console.log(__dirname);
                     console.log(req.file)
                     user.name = req.body.name;
                     user.email = req.body.email;
