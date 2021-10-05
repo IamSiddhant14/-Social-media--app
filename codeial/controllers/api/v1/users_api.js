@@ -1,7 +1,9 @@
 //This file is responsible for genrating the json webtoken
+//We are sending the data to this file with the help postman
 
 
 const User = require('../../../models/user');
+//Libary reqiured for creating Jsonwebtoken
 const jwt = require('jsonwebtoken');
 
 module.exports.createSession = async function(req,res){

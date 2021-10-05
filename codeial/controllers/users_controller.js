@@ -70,6 +70,7 @@ module.exports.profile=function(req,res){
 
 
 module.exports.signup= function(req,res){
+    console.log(req.user)
     //This will prevent showing the signin/signup page when the user is been loggedin or signed in
     if(req.isAuthenticated()){
         return res.redirect('/users/signin')
@@ -123,6 +124,7 @@ module.exports.create = function(req,res){
 module.exports.createSession= function(req,res){
     //This messsage need to transfered to the responce,we will use an coustum middelware for the same
     console.log('inside createsession controller');
+    console.log(req.user);
               //  TYPE           MESSAGE
     req.flash('success','Logged in Successfully');
     // return res.redirect('/users/profile');

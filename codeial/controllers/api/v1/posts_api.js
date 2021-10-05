@@ -41,23 +41,21 @@ module.exports.destroy= async function(req,res){
                     message:"post and associated comments deleted"
                 })
         }else{
-            //    req.flash('error','You cannot delete this Post ')
-            //    return res.redirect('back')
-            return res.json(500,{
+            // req.flash('error','You cannot delete this Post ')
+            // return res.redirect('back')
+            return res.json(401,{
                 message: "internal server error"
             })
             }
 
     }catch(err){
         
-        return res.json(200,{
+        return res.json(500,{
             message:"Internal server Error"
         })
         
 
     }
-
-
           
 }
 
