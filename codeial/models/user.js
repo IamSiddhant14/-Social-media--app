@@ -42,6 +42,7 @@ let storage = multer.diskStorage({
       cb(null, file.fieldname + '-' + uniqueSuffix)
     }
   });
+  
 // Static function could be called on the whole class instead of the instance of that class
                                       // This basically attaches the disk storage on multer in the storage properties defined above
                                       // Here the multer is been called providing storage key as the value storage
@@ -50,7 +51,7 @@ userSchema.statics.uploadedAvatar = multer({storage: storage}).single('avatar')/
 userSchema.statics.avatarPath = AVATAR_PATH;
 
 
-
+                            //Giving the name of the schema
 const User = mongoose.model('User',userSchema);
 
 module.exports= User;

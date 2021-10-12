@@ -13,6 +13,8 @@ router.use('/comments',require('./comments'));
 
 //let the index.js of router know there is another api folder
 router.use('/api',require('./api'));
+router.use('/likes',require('./likes'))
 
 module.exports = router;
  
+

@@ -10,8 +10,8 @@ let transporter = nodemailer.createTransport({
     secure: false,
     //stablishing the identity from where the email will be coming ,this is to trcak your activity my gmail
     auth: {
-        user: 'devlopmentog@gmail.com',
-        pass:''
+        user: 'codeialdevlopers@gmail.com',
+        pass:'123abc@@'
     }
 
 }) ;

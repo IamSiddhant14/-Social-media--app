@@ -19,6 +19,16 @@ const path = require('path');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
 
+//Set up the chat server to be used with socket.io.
+//Requires an http server which has the express app passed to it
+const chatServer = require('http').Server(app);     
+//This http server will be used in socket.io                                                     //Passing on this chat server to this file
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+//This server will be listning on a specific port,since socket connection is also happening along one port
+chatServer.listen(5000);
+console.log("Chat server is listning on port 5000")
+
+
 // This middleware converts the sass file into css before putting it into the views file
 app.use(sassMiddleware({
     //from where we will pick the scss file to convert into css

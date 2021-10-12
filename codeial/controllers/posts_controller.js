@@ -94,16 +94,12 @@ module.exports.destroy= async function(req,res){
         }else{
                req.flash('error','You cannot delete this Post ')
                return res.redirect('back')
-            }
-
+        }
     }catch(err){
         req.flash('error',err)
         console.log('Error',err)
 
     }
-
-
-          
 }
 
 

@@ -2,6 +2,8 @@ const Comment = require('../models/comment');
 const Post = require('../models/post');
 const commentsMailer = require('../mailers/comments_mailer')
 const { post } = require('../routes/posts');
+const commentEmailWOrker = require('../workers/comment_email_worker');
+const queue = require('../config/kue');
 
 // module.exports.create = function(req,res){
 //     //Here req.body.post refer to the input type post which is post.id
@@ -48,8 +50,18 @@ module.exports.create = async function(req,res){
             //updating changes and saving it
             post.save();
                 comment = await comment.populate('user','name email').execPopulate();
-                commentsMailer.newComment(comment);
-                req.flash('success','comment added')
+                // commentsMailer.newComment(comment);
+                //The above line/job is been put into the queue if the queue exisist and if it does then the queue is been created
+                               //Name of queue
+                let job = queue.create('emails',comment).save(function(err){
+                    if(err){
+                        console.log('Error in creating a queue');
+                    }
+
+                    console.log('job enqueued',job.id);
+                });
+
+                req.flash('success','comment added');
                 //adding comment to the comments array
 
 

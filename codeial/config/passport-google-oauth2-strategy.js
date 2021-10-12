@@ -1,5 +1,5 @@
 const passport = require('passport');
-// passport-google-oauth is the combination of two strategy one is Oauth20 and the otherone is Oauth1                                                      // specific strategy
+// passport-google-oauth is the combination of two strategy one is Oauth20 and the other one is Oauth1                                                      // specific strategy
 const googleStrategy = require('passport-google-oauth').OAuth2Strategy;
 // used to genrate random passpwowrd
 const crypto = require('crypto');

@@ -1,5 +1,7 @@
 
 <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/chat_box.css">
+
 <h1 style="text-align: center">This Is <%= title %></h1>
 <div id="home-container">
 
@@ -33,7 +35,7 @@
         <%}%>
     </section>
 
-
+    <%- include('_chat_box'); %>
 
 </div>
 <!-- Since we have already defined that all the static files is been present in the assests folder therefore here we 
@@ -41,5 +43,13 @@ will not use ../assests and just /js/home_post.js
 Here below file overrides the below mentioned  -->
 
 <script src="/js/home_post.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+<% if(locals.user){%>
 
+    <script>
+        new ChatEngine('user-chat-box','<%= locals.user.email %>')
+    </script>
+    
+<%}%>
 
