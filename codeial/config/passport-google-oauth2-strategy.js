@@ -10,7 +10,7 @@ passport.use(new googleStrategy({
     clientID :'1039705527746-fn7vt4vis3kip4990ldj5j5dq2052v0f.apps.googleusercontent.com',
     clientSecret : 'ow-s0Ska-sAtrTvUheoQ8P4M',
     callbackURL: "http://localhost:8000/users/auth/google/callback"
-},//Access token is nothing but the jwt token genrate by google auth
+},//Access token is nothing but the jwt token genrated by google auth
 // Refresh token is been used when our acccess token exprires
   function(accessToken,refreshToken,profile,done){
 // Profile is going to contain the user info
@@ -29,7 +29,7 @@ passport.use(new googleStrategy({
              return done(null,user);
 
          }else{
-             //if not found  create the user and set it as req.user
+             //if not found create the user and set it as req.user
              User.create({
                  name: profile.displayName,
                  email: profile.emails[0].value,

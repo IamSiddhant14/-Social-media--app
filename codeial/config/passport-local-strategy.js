@@ -50,7 +50,7 @@ passport.use(new LocalStrategy({
 
 ));
 
-//serializing the user to decide which key is to be kept in the cookies when sending the cookie to the browser where our key is been encryypted in the cookie
+//serializing the user to decide which key is to be kept in the cookies when sending the cookie to the browser where our key is been encrypted in the cookie
 passport.serializeUser(function (user, done) {
     //injecting the userid in the cookie in the encripted formate
     console.log(`*******serializeUser******* ${user}`);
@@ -97,4 +97,5 @@ passport.setAuthenticatedUser = function (req, res, next) {
 
 
 module.exports = passport;
+
 

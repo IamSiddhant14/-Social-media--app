@@ -1,8 +1,9 @@
 //creating the connection
-//front-end or subsriber
+//front-end or subscriber
 class ChatEngine {
     //ID of the chat box ,email id of the user
     constructor(chatBoxId, userEmail) {
+        // 1 dollar for ajax and 2 dollar for interpolation of string
         this.chatBox = $(`#${chatBoxId}`);
         this.userEmail = userEmail;
 

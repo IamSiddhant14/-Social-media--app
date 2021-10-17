@@ -18,6 +18,7 @@
                 type: 'post',
                 url: '/posts/create',
                 //serializer converts the post form data in json
+                //This all things are been performed before sending the data to the controllers
                 data: newPostForm.serialize(),
                 success: function (data) {
                     console.log(data)
@@ -69,7 +70,8 @@
 let newPostDom = function (post) {
 
     // let x= 5;
-    // `Arpan${x}`
+    //`Arpan${x}`
+    //This is helpfull in interpolating the strings
     // output-
     // Arpan5
     //form 2

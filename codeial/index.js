@@ -18,9 +18,8 @@ const sassMiddleware = require('node-sass-middleware');
 const path = require('path');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
-
 //Set up the chat server to be used with socket.io.
-//Requires an http server which has the express app passed to it
+//Requires an http server which has the express app passed to it.
 const chatServer = require('http').Server(app);     
 //This http server will be used in socket.io                                                     //Passing on this chat server to this file
 const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
@@ -40,7 +39,7 @@ app.use(sassMiddleware({
     //every thing in single or multiple lines(minified or not)
     outputStyle:'extended',
     //Where to look the css files 
-    prefix:'/css'
+    prefix:'/css' // Important --- Where prefix is at <link rel="stylesheets" href="/css/style.css"/>
 
     //This does not get compilned at the time of starting the server but at the time of reloading a page/rendering a page
 
@@ -53,7 +52,7 @@ app.use(sassMiddleware({
 //     outputStyle: 'extended',  // To not show in one line
 //     prefix: '/css'   // Important --- Where prefix is at <link rel="stylesheets" href="/css/style.css"/>
 // }));
-//convert the form data field by the user into the form of req.body
+//convert the form data field by the user into the form of req.body which was earlier encrpted
 app.use(express.urlencoded());
 //The cookie parser is used for reading and writting into cookies
 app.use(cookieParser());
@@ -106,7 +105,7 @@ app.use(passport.session());
 //This is described in the passport.js
 app.use(passport.setAuthenticatedUser);
 
-//Flash messages are stored in the session cookie and are been cleared in the very next rquest
+//Flash messages are stored in the session cookie and are been cleared in the very next request
 //Flash message will be stored in the cookie which stores session info
 //Before the redirecting to the page the flash message need to be setted up in the locals
 
@@ -115,12 +114,15 @@ app.use(flash());
 app.use(customMware.setFlash);
 
 // use express router
-app.use('/',require('./routes'))  
+app.use('/',require('./routes'));
 
 app.listen(port, function(err){
     if(err){
+        //`xyz ${err}` --This is string interpolation
         console.log(`an error is been discovered : ${err}`)
     }
 
     console.log(`your server is up and running on port : ${port}`)
 })
+
+

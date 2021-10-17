@@ -30,9 +30,11 @@ passport.use(new JWTStrategy (opts,function(jwtPayLoad, done){
               return done(null,user)
           }else{
               return done(null,false);
-          }
+          }5
+          
+           
       })
-
+ 
 }));
 
 module.exports = passport;

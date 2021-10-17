@@ -1,4 +1,4 @@
-
+//Observer or server 
 module.exports.chatSockets = function(socketServer){
         //Receving the request for connection
     //io will be handling the connection
