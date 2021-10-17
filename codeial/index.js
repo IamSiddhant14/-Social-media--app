@@ -1,5 +1,6 @@
 const express = require('express');
 const app=express();
+const env = require('./config/enviroment');
 //used to read and write cookies
 const cookieParser= require('cookie-parser');
 const port = 8000;
@@ -28,12 +29,12 @@ chatServer.listen(5000);
 console.log("Chat server is listning on port 5000")
 
 
-// This middleware converts the sass file into css before putting it into the views file
+//This middleware converts the sass file into css before putting it into the views file
 app.use(sassMiddleware({
     //from where we will pick the scss file to convert into css
-    src: path.join('assets/scss'),
+    src: path.join(__dirname, env.asset_path, 'scss'),
     //The place where we will put the converted scss files
-    dest: path.join('assets/css'),
+    dest: path.join(__dirname, env.asset_path, 'css'),
     //To allow the visibily of the terminal (false in production)
     debug:true,
     //every thing in single or multiple lines(minified or not)
@@ -59,7 +60,7 @@ app.use(cookieParser());
 //this is used so as to load the layouts along with the ejs files
 app.use(expressLayouts);
 
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 
 //Made the upload part availblle to the browser
 app.use('/uploads',express.static(__dirname+ '/uploads'));
@@ -80,7 +81,7 @@ app.use(session({
     //Here codeial is the name of the cookie
     name:'codeial',
     //this is key which is used while encrption and decrption
-    secret:'blahsomething',
+    secret: env.session_cookie_key,
     //prevent setting up extra data in the session cookie
     saveUninitialized:false,
     //prevent the rewrittin of the data even when it is not been changed

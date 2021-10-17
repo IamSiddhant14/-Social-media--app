@@ -3,6 +3,7 @@ const passport = require('passport');
 const JWTStrategy = require('passport-jwt').Strategy;
 //Module to extract jwt from the header
 const ExtractJwt = require('passport-jwt').ExtractJwt;
+const env = require('./enviroment')
 
 const User = require('../models/user');
 
@@ -12,7 +13,7 @@ let opts ={
     jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken()  ,
     //Key used for decrption and encrption
     //Should never be changed after creating a token as then we wont be able to decrypt the token
-    secretOrKey : 'codeial'
+    secretOrKey : env.jwt_secret
 }
             //Telling passport that we will use the JWTSTRATEGY  
             //The jwt is genrated in the create-session controller

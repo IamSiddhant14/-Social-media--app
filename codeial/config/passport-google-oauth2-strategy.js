@@ -4,12 +4,13 @@ const googleStrategy = require('passport-google-oauth').OAuth2Strategy;
 // used to genrate random passpwowrd
 const crypto = require('crypto');
 const User = require('../models/user');
-
+const env = require('./enviroment');
 //Tell passport to use a new strategy for google login
 passport.use(new googleStrategy({
-    clientID :'1039705527746-fn7vt4vis3kip4990ldj5j5dq2052v0f.apps.googleusercontent.com',
-    clientSecret : 'ow-s0Ska-sAtrTvUheoQ8P4M',
-    callbackURL: "http://localhost:8000/users/auth/google/callback"
+clientID : env.google_client_id,
+clientSecret : env.google_client_secret ,
+callbackURL: env.google_call_back_url
+    
 },//Access token is nothing but the jwt token genrated by google auth
 // Refresh token is been used when our acccess token exprires
   function(accessToken,refreshToken,profile,done){

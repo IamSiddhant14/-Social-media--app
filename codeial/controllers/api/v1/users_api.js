@@ -5,6 +5,7 @@
 const User = require('../../../models/user');
 //Libary reqiured for creating Jsonwebtoken
 const jwt = require('jsonwebtoken');
+const env= require('../../../config/enviroment');
 
 module.exports.createSession = async function(req,res){
 
@@ -22,7 +23,7 @@ module.exports.createSession = async function(req,res){
             data:{          //converting the user to json
                             // This is the part which gets encrpted
                             //we are genrating the jwt
-                 token: jwt.sign(user.toJSON(),'codeial', {expiresIn :'100000'} )
+                 token: jwt.sign(user.toJSON(),env.jwt_secret, {expiresIn :'100000'} )
             }
         })
     }catch(err){
