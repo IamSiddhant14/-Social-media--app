@@ -1,6 +1,8 @@
 const express = require('express');
 const app=express();
 const env = require('./config/enviroment');
+//for putting the logs in the file
+const logger = require('morgan');
 //used to read and write cookies
 const cookieParser= require('cookie-parser');
 const port = 8000;
@@ -30,21 +32,25 @@ console.log("Chat server is listning on port 5000")
 
 
 //This middleware converts the sass file into css before putting it into the views file
-app.use(sassMiddleware({
-    //from where we will pick the scss file to convert into css
-    src: path.join(__dirname, env.asset_path, 'scss'),
-    //The place where we will put the converted scss files
-    dest: path.join(__dirname, env.asset_path, 'css'),
-    //To allow the visibily of the terminal (false in production)
-    debug:true,
-    //every thing in single or multiple lines(minified or not)
-    outputStyle:'extended',
-    //Where to look the css files 
-    prefix:'/css' // Important --- Where prefix is at <link rel="stylesheets" href="/css/style.css"/>
+if(env.name == 'devlopment'){
 
-    //This does not get compilned at the time of starting the server but at the time of reloading a page/rendering a page
-
-}));
+    app.use(sassMiddleware({
+        //from where we will pick the scss file to convert into css
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        //The place where we will put the converted scss files
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        //To allow the visibily of the terminal (false in production)
+        debug:true,
+        //every thing in single or multiple lines(minified or not)
+        outputStyle:'extended',
+        //Where to look the css files 
+        prefix:'/css' // Important --- Where prefix is at <link rel="stylesheets" href="/css/style.css"/>
+    
+        //This does not get compilned at the time of starting the server but at the time of reloading a page/rendering a page
+    
+    }));
+    
+}
 
 // app.use(sassMiddleware({
 //     src: './assets/scss',
@@ -58,6 +64,8 @@ app.use(express.urlencoded());
 //The cookie parser is used for reading and writting into cookies
 app.use(cookieParser());
 //this is used so as to load the layouts along with the ejs files
+
+app.use(logger(env.morgan.mode , env.morgan.options))
 app.use(expressLayouts);
 
 app.use(express.static(env.asset_path));

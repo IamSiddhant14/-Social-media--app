@@ -9,13 +9,14 @@
     "cookie-parser": "^1.4.5",
     "crypto": "^1.0.1",
     "ejs": "^3.1.6",
-    "express": "^4.17.1",                                                              
+    "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.2",
     "index.js": "^0.0.3",
     "jsonwebtoken": "^8.5.1",
     "kue": "^0.11.6",
     "mongoose": "^6.0.10",
+    "morgan": "^1.10.0",
     "multer": "^1.4.3",
     "node-sass-middleware": "^0.11.0",
     "nodemailer": "^6.6.5",
@@ -24,12 +25,15 @@
     "passport-google-oauth": "^2.0.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "rotating-file-stream": "^2.1.6",
     "socket.io": "^4.2.0"
   },
   "devDependencies": {},
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "_comment": " telling the express server to start in production mode",
+    "prod_start": "NODE_ENV=production nodemon index.js"
   },
   "author": "Siddhant",
   "license": "ISC"
